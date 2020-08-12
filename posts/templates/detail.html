@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block container %}
+<div class="container">
+    <h1>작성자</h1>
+    <p class="text-justify">{{ post.author }}</p>
+    <h1>내용</h1>
+    <p class="text-justify">{{ post.contents }}</p>
+    <h1>댓글</h1>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">작성자</th>
+            <th scope="col">내용</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for tag in post.tag_set.all %}
+        <tr>
+            <td>{{ tag.author }}</td>
+            <td>{{ tag.contents }}</td>
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+<h1>댓글작성</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form tag_form %}
+        <button type="submit" class="btn btn-primary">등록</button>
+    </form>
+</div>
+{% endblock %}
+<!--
+<div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Recipient's username" aria-label="댓글입력" aria-describedby="button-addon2">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">완료</button>
+  </div>
+</div>
+-->
